@@ -1,0 +1,44 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.0'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'groovy'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+
+mainClassName = 'CheapestPath'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+test {
+    outputs.upToDateWhen { false }
+    testLogging {
+        afterSuite { desc, result ->
+            if (!desc.parent) { // will match the outermost suite
+                println " |---  Unit Tests: ${result.resultType} (${result.testCount} tests, " +
+                        "${result.successfulTestCount} successes, ${result.failedTestCount} " +
+                        "failures, ${result.skippedTestCount} skipped) ---|"
+            }
+        }
+    }
+}
+
+dependencies {
+    compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+}
+
+shadowJar.dependsOn test
