@@ -37,6 +37,4 @@ java -jar build\libs\cheapest-path-all.jar CheapestPath.class --help
 ```
 $ java -jar build/libs/cheapest-path-all.jar CheapestPath.class --rows=10 --columns=10 --max-value=9
 ```
-![Image](screenshot1.png?raw=true)
-
-![Image](screenshot2.png?raw=true)
+![Image](screenshot.png?raw=true)
